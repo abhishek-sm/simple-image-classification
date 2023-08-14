@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dog Cat Classifier</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            color: #333;
+            margin: 20px 0;
+        }
+
+        form {
+            margin: 20px auto;
+            max-width: 400px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="file"] {
+            display: block;
+            margin: 10px auto;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        h2 {
+            margin-top: 20px;
+            color: #333;
+        }
+
+        #prediction {
+            color: #007bff;
+            font-weight: bold;
+        }
+        #imageContainer {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center; /* Center the content horizontally */
+            align-items: center; /* Center the content vertically */
+            height: 200px; /* Set a fixed height for the container */
+        }
+
+        #selectedImage {
+            max-width: 100%;
+            max-height: 100%;
+            display: none;
+        }
+    </style>
+<body>
+    <h1>Dog Cat Classifier</h1>
+    <form action="/predict" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" id="imageInput">
+        <input type="submit" value="Predict">
+    </form>
+    <div id="imageContainer">
+        <img id="selectedImage" src="" alt="Selected Image">
+    </div>
+    <h2>Prediction: <span id="prediction"></span></h2>
+
+    <script>
+        const imageInput = document.getElementById('imageInput');
+        const selectedImage = document.getElementById('selectedImage');
+        const predictionLabel = document.getElementById('prediction');
+
+        imageInput.addEventListener('change', () => {
+            const file = imageInput.files[0];
+            if (file) {
+                selectedImage.src = URL.createObjectURL(file);
+                selectedImage.style.display = 'block';
+            } else {
+                selectedImage.src = '';
+                selectedImage.style.display = 'none';
+            }
+        });
+
+        const form = document.querySelector('form');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            predictionLabel.textContent = 'Predicting...';
+            
+            const formData = new FormData(form);
+            const response = await fetch('/predict', {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+            predictionLabel.textContent = `Prediction: ${data.prediction}`;
+        });
+    </script>
+</body>
+</html>
+
