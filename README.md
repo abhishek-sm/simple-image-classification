@@ -25,7 +25,7 @@ The "PetPredictor" Website is intended for animal lovers, pet owners, and anyone
   pip install Flask tensorflow pillow
 
 ```
-3. navigating to the dog_cat_classifier directory, and running the following command:
+3. navigating to the dog_cat_classifier directory, and run the following command:
 ```bash
 python app.py
 ```
