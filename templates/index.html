@@ -6,7 +6,7 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #f2f2f2;
+            background-color:grey;
         }
 
         h1 {
@@ -14,15 +14,32 @@
             margin: 20px 0;
         }
 
-        form {
+        form  {
             margin: 20px auto;
-            max-width: 400px;
+            max-width: 300px;
             padding: 20px;
             border: 1px solid #ddd;
-            background-color: #fff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color:grey;
+            box-shadow: 0 200px 400px rgba(253, 254, 254, 0.1);
         }
-
+       #abhi {
+background: #0066A2;
+color: grey;
+border-style: outset;
+border-color: #0066A2;
+height: 50px;
+width: 100px;
+font: bold15px arial,sans-serif;
+text-shadow: none;
+}
+#abhi:hover {
+background: #016ABC;
+color: #fff;
+border: 1px solid #eee;
+border-radius: 20px;
+box-shadow: 5px 5px 5px #eee;
+text-shadow: none;
+}
         input[type="file"] {
             display: block;
             margin: 10px auto;
@@ -47,8 +64,9 @@
         }
 
         #prediction {
-            color: #007bff;
+            color:white;
             font-weight: bold;
+
         }
         #imageContainer {
             margin-top: 20px;
@@ -68,12 +86,12 @@
     <h1>Dog Cat Classifier</h1>
     <form action="/predict" method="post" enctype="multipart/form-data">
         <input type="file" name="file" id="imageInput">
-        <input type="submit" value="Predict">
+        <input type="submit" value="Predict" id="abhi">
     </form>
     <div id="imageContainer">
         <img id="selectedImage" src="" alt="Selected Image">
     </div>
-    <h2>Prediction: <span id="prediction"></span></h2>
+    <h2><span id="prediction"></span></h2>
 
     <script>
         const imageInput = document.getElementById('imageInput');
